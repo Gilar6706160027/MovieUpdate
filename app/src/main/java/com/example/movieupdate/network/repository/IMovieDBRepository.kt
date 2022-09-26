@@ -11,5 +11,5 @@ interface IMovieDBRepository {
     suspend fun getMovieById(movieID: String) : Result<Movie>
     suspend fun getCast(movieID: String) : Result<Cast>
     suspend fun getCrew(movieID: String) : Result<Crew>
-    suspend fun getReview(movieID: String) : Result<ListReview>
+    suspend fun getReview(movieID: String) : Result<ReviewWrapper>
 }

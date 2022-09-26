@@ -42,7 +42,7 @@ class MovieDetailActivity : BaseActivity<MovieDetailViewModel, ActivityMovieDeta
         getMovie(position!!)
         getCast(position)
         getCrew(position)
-        //getReview(position!!)
+        getReview(position!!)
     }
 
     private fun setToolbarActions() {
@@ -76,7 +76,7 @@ class MovieDetailActivity : BaseActivity<MovieDetailViewModel, ActivityMovieDeta
         viewModel.getReviewById(movieID).observe(this) {
             when (it) {
                 is Result.Success -> {
-                    val recyclerAdapter = ReviewAdapter(it.data.listReview)
+                    val recyclerAdapter = ReviewAdapter(it.data.results)
 
                     binding.rvReview.apply {
                         layoutManager = LinearLayoutManager(

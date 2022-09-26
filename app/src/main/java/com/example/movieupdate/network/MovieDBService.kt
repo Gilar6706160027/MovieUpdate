@@ -65,5 +65,5 @@ interface MovieDBService {
         @Path("movieID") movieID: String?,
         @Query("api_key") key: String = API_KEY,
         @Query("language") language: String = LANGUAGE,
-    ): Response<ListReview>
+    ): Response<ReviewWrapper>
 }

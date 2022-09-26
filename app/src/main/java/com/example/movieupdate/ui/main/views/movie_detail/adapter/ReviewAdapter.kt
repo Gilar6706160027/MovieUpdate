@@ -1,8 +1,10 @@
 package com.example.movieupdate.ui.main.views.movie_detail.adapter
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieupdate.R
 import com.example.movieupdate.model.Review
+
 
 class ReviewAdapter(
     private val reviewList: List<Review>,
@@ -31,22 +34,26 @@ class ReviewAdapter(
     override fun onBindViewHolder(viewHolder: CastViewHolder, position: Int) {
         val review: Review = reviewList[position]
 
-        viewHolder.tvCreatedDate.apply {
-            text = review.created_at
-        }
         viewHolder.tvContentReview.apply {
             text = review.content
+            maxLines = 2
         }
 
-        Glide.with(viewHolder.profileAuthor.context).load(viewHolder.profileAuthor.context.getString(R.string.w220h330))
-            .apply(RequestOptions().centerCrop())
-            .into(viewHolder.profileAuthor)
+        review.author_details.apply {
+        }
+        if (review.author_details.avatar_path.isNullOrEmpty() || review.author_details.avatar_path == "null" || review.author_details.avatar_path.isNullOrBlank() || review.author_details.avatar_path == null) {
+            viewHolder.profileAuthors.setImageResource(R.drawable.ic_people_24)
+        }else{
+            Glide.with(viewHolder.profileAuthors.context)
+                .load(viewHolder.profileAuthors.context.getString(R.string.w220h330) + review.author_details.avatar_path)
+                .apply(RequestOptions().centerCrop())
+                .into(viewHolder.profileAuthors)
+        }
     }
 
 
     inner class CastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val profileAuthor: ImageView = itemView.findViewById(R.id.profileAuthor)
+        val profileAuthors: ImageView = itemView.findViewById(R.id.profileAuthor)
         val tvContentReview: TextView = itemView.findViewById(R.id.contentReview)
-        val tvCreatedDate: TextView = itemView.findViewById(R.id.dateReview)
     }
 }

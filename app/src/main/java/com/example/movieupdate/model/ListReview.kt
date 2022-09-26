@@ -1,3 +1,3 @@
 package com.example.movieupdate.model
 
-data class ListReview(val listReview: List<Review>)
+data class ListReview(val listReview: Review)

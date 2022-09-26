@@ -2,7 +2,7 @@ package com.example.movieupdate.model
 
 data class Review(
     val author: String,
-    val authorDetail: List<AuthorDetail>?,
+    val author_details: AuthorDetail,
     val content: String,
     val created_at: String,
     val id: String,
